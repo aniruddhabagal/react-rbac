@@ -1,6 +1,81 @@
-# Getting Started with Create React App
+# Getting Started to React RBAC (Role Base Access Control)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How does a Role Base Acces Control work?
+
+- this system rely on every user or entity within a system having a designated role, this role determines their permissions. example:
+
+  - When a user creates an account, a role with specific permissions is assigned to the user based on the user’s group.
+  - This role is then stored alongside other user information in the database.
+  - When the user attempts to access a protected route, the user’s role and other information are retrieved from the database.
+  - The user’s role is cross-checked to confirm if the role of the user matches the required role to access the information requested.
+  - If the user’s role matches the required role, access is granted, else access will be denied.
+
+## Components
+
+- route
+
+```ts
+// Role Component
+const RoleBaseAccessControl = ({ allowedRoles }: Props) => {
+  const location = useLocation()
+  const dispatch = useDispatch()
+  const user = useAppSelector((state) => state.auth.user)
+
+  const isAllowed = allowedRoles.some((r) => user?.roles?.includes(r))
+  useEffect(() => {
+    dispatch(setErrorCode(!isAllowed ? '403' : ''))
+  }, [isAllowed])
+
+  return isAllowed ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/unauthorized" state={{ from: location }} replace />
+  )
+}
+export default RoleBaseAccessControl
+
+// implements
+ <Route element={<RoleBaseAccessControl allowedRoles={['supervisor', 'admin']} />}/>
+ ... routes childrens
+ </Route>
+```
+
+- component permisions
+
+```ts
+// Hook
+// permisions ['read', 'create', 'edit', 'delete', 'all']
+// a simple user has default read permission
+// the admin have all permisions by default
+const useRBAC = (user: IUser, permission: any) => {
+  const regex = new RegExp(permission, 'ig')
+  const isAllowed = user.permissions.some(
+    (p: any) => p === 'all' || regex.test(p)
+  )
+  return isAllowed
+}
+export default useRBAC
+//implement
+// the actions are limited by permissions
+const SecureComponent = ({ user }: any) => {
+  const isAllowedEdit = useRBAC(user, 'edit')
+  const isAllowedCreate = useRBAC(user, 'create')
+  const isAllowedDelete = useRBAC(user, 'delete')
+  return (
+    <Grid item>
+      <Typography>{user.name}</Typography>
+      access to read this : ok
+      {isAllowedEdit && <Button>edit</Button>}
+      {isAllowedCreate && <Button>create</Button>}
+      {isAllowedDelete && <Button>delete</Button>}
+    </Grid>
+  )
+}
+```
+
+## finaly
+
+- More pages and roles can be added using the same logic. We could have more scrutiny in each department, but that’s up to you. Happy coding!
 
 ## Available Scripts
 
