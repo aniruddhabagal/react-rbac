@@ -2,7 +2,7 @@ import ErrorBoundary from 'Components/Errors/ErrorBoundary'
 import ErrorFallback from 'Components/Errors/ErrorFallback'
 import Loadable from 'Components/Loaders/Loadable'
 
-import { useAppSelector } from 'Redux'
+import { useAppSelector } from '../Redux'
 import { lazy } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import routesList from './routes'

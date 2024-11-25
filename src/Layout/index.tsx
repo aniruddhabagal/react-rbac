@@ -1,7 +1,7 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material'
 import ErrorBoundary from 'Components/Errors/ErrorBoundary'
 import ErrorFallback from 'Components/Errors/ErrorFallback'
-import { useAppSelector } from 'Redux'
+import { useAppSelector } from '../Redux'
 import { setOpenSideBar } from 'Redux/slices/GlobalSlice'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'

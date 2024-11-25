@@ -1,4 +1,4 @@
-import { store } from 'Redux'
+import { store } from './Redux/index'
 import AppRouter from 'Routes'
 import { Provider } from 'react-redux'
 import './App.css'

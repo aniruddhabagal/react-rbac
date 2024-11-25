@@ -1,4 +1,4 @@
-import { useAppSelector } from 'Redux'
+import { useAppSelector } from '../Redux'
 import { setErrorCode } from 'Redux/slices/GlobalSlice'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'

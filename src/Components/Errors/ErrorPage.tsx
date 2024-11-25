@@ -2,7 +2,7 @@ import { Box, Button, Grid, Typography } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { useAppSelector } from 'Redux'
+import { useAppSelector } from '../../Redux'
 import { setErrorCode } from 'Redux/slices/GlobalSlice'
 import statusCode from './StatusCode'
 

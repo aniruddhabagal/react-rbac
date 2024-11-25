@@ -17,7 +17,7 @@ import {
   Typography,
   useTheme,
 } from '@mui/material'
-import { useAppSelector } from 'Redux'
+import { useAppSelector } from '../../Redux'
 import { setLogout } from 'Redux/slices/AuthSlice'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'

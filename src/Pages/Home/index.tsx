@@ -1,6 +1,6 @@
 import { Button, Grid, Typography } from '@mui/material'
 import useRBAC from 'Hooks/useRBAC'
-import { useAppSelector } from 'Redux'
+import { useAppSelector } from '../../Redux'
 
 type Props = {}
 
